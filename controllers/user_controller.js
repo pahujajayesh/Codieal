@@ -46,3 +46,8 @@ module.exports.createSession=function(req,res){
     console.log("Logged in successfully");
     return res.redirect('/');
 }
+
+module.exports.destroySession=function(req,res){
+    req.logout();
+    return res.redirect('/');
+}
