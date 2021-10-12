@@ -20,6 +20,6 @@ try {
     });
   }
 } catch (err) {
-  console.lof("Error", err);
+  console.log("Error", err);
   return;
 }

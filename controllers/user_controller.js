@@ -13,6 +13,7 @@ module.exports.profile = function(req, res){
 module.exports.update = function(req, res){
   if(req.user.id == req.params.id){
       User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+        req.flash('success','Profile Updated Successfully!')
           return res.redirect('back');
       });
   }else{
@@ -64,11 +65,12 @@ module.exports.create = function (req, res) {
 };
 
 module.exports.createSession = function (req, res) {
-  console.log("Logged in successfully");
+  req.flash('success','Logged in Sucessfully..');
   return res.redirect("/");
 };
 
 module.exports.destroySession = function (req, res) {
   req.logout();
+  req.flash('success','Logged out..');
   return res.redirect("/");
 };
