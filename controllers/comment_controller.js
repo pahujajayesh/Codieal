@@ -12,6 +12,15 @@ try{
                 
                 post.comments.push(comment);
                 post.save();
+                if(req.xhr){
+                    comment=await comment.populate('user','name').execPopulate();
+                    return res.status(200).json({
+                        data: {
+                            comment: comment
+                        },
+                        message: "Post created!"
+                    });
+                }
                 req.flash('success','Comment created successfully!!')
                 return res.redirect('/');
         }
@@ -29,6 +38,14 @@ try{
                 let postId=comment.post;
                 comment.remove();
                 let post=await Post.findByIdAndUpdate(postId,{$pull:{comment:req.params.id}});
+                if(req.xhr){
+                    return res.status(200).json({
+                        data: {
+                            comment_id: req.params.id
+                        },
+                        message: "Post deleted"
+                    });
+                }
                     req.flash('success','Comment deleted successfully');
                     return res.redirect('back');
             }
