@@ -1,2 +1,9 @@
 body {
   background-color: lightblue; }
+  body img {
+    margin: 20px;
+    width: 150px; }
+  body input {
+    display: block;
+    margin: 20px;
+    font-size: 0.9rem; }
