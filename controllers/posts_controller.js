@@ -1,7 +1,8 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
-try {
+
     module.exports.create = async function (req, res) {
+      try {
        let post= await Post.create({
           content: req.body.content,
           user: req.user._id,
@@ -17,13 +18,14 @@ try {
         req.flash('success',"Post Created Sucessfully!!")
         return res.redirect("back");
       }
-} catch (err) {
-  req.flash("error", err);
-  return res.redirect("back");
-}
+      catch (err) {
+        req.flash("error", err);
+        return res.redirect("back");
+      }
+} 
 
-try{
     module.exports.destroy = async function (req, res) {
+try{
 
         let post=await Post.findById(req.params.id);
            if (post.user == req.user.id) {
@@ -44,9 +46,9 @@ try{
            }
        
        }
-       
+       catch (err) {
+        req.flash("error", err);
+        return res.redirect("back");
+      }      
 }
-catch (err) {
-  req.flash("error", err);
-  return res.redirect("back");
-}
+
